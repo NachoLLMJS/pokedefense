@@ -1,0 +1,11 @@
+.vercel/
+site/
+node_modules/
+.env
+.env.*
+*.pem
+*.key
+__pycache__/
+qa-*.png
+qa-*-results.json
+qa-results.json

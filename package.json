@@ -1,0 +1,9 @@
+{
+  "name": "pokedefense",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build-static.cjs",
+    "test": "node --test *.test.cjs"
+  }
+}

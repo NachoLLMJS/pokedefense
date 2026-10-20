@@ -1,0 +1,17 @@
+POKEDEFENSE — LOCAL FAN PROJECT
+
+Character sprite sheets and geometry copied from the user's PokeSurvivor assets. Original SpriteCollab credits retained in SOURCE-CREDITS.md. These are community sprites; do not represent every sprite as official Nintendo artwork.
+Font copied from PokeSurvivor with its OFL.txt.
+
+Nexus: the orange-roof chimney house from the user-supplied 8192.gif sprite sheet.
+Original file retained unchanged as assets/source-buildings.gif (439 x 250, single frame).
+House is the exact RGBA crop (76,91)-(140,166), 64 x 75 pixels, saved as assets/nexus-house.png and rendered uniformly at 2x. The supplied transparency is retained; no recoloring, silhouette repaint or generic replacement.
+The sheet credits its creator as "Made By Bacom - Webmaster" and NinjaSprites. The original credit panel remains in the retained source sheet. No reuse license was supplied; do not describe this as an officially licensed Nintendo asset distribution or assume commercial permission.
+The previous Pikachu-hut crop and download were retired and are no longer loaded.
+Pokemon and related characters belong to their respective rights holders. No affiliation with Nintendo, Game Freak, The Pokemon Company, Chunsoft or Spike Chunsoft. Local fan prototype; do not assume permission for commercial publication.
+
+Terrain is rendered by byte-identical copies of PokeSurvivor's core/util.js, world/tiles.js and world/world.js, including its original soil, water, trees, rocks and tall grass. Map seed 723, original forest biome 0, viewport origin (-480,-320). No tiles or props are redrawn, deleted or replaced. The dotted line is only a tactical route indicator over the original map. The source project generates maps procedurally, so there is no single fixed map image to copy. Same-seed terrain and prop parity is tested against PokeSurvivor itself.
+Original synthesized sound module also copied unchanged from PokeSurvivor. The original sprite animation loader, types/pokedex/moves/starters catalogs, VFX/FX/projectiles and combat system are likewise copied byte-identically. skill-bridge.js adapts those original moves to stationary defenders and TD upgrades. The source Combat.resolve handles attack damage; the legacy engine attack path is disabled when this bridge is installed.
+Game interface and tower-defense economy/wave orchestration are new. No credentials or backend dependencies.
+
+Enemy assets: 60 normal species in five staged groups, plus three bosses (63 unique enemy species). Walk sheets are copied byte-identically from PokeSurvivor and browser-decoded in QA. Six ranged defenders use the original canonical starter abilities, including returning Razor Leaf and radial Bubble. No original source module was edited.

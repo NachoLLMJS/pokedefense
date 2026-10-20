@@ -1,0 +1,2 @@
+# Preserve upstream attribution/license bytes, including their original whitespace.
+assets/fonts/OFL.txt -whitespace

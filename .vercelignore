@@ -1,0 +1,12 @@
+.git/
+.vercel/
+site/
+node_modules/
+.env
+.env.*
+*.pem
+*.key
+__pycache__/
+qa-*
+*.test.cjs
+Abrir PokeDefense.cmd
