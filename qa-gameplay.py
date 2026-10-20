@@ -16,6 +16,7 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.on('requestfailed',lambda req:failed.append(req.url))
     page.goto((ROOT/'index.html').as_uri())
+    page.locator('#intro-play').click()
     page.wait_for_function('window.pokeDefense && window.RescueSkills && document.fonts.status === "loaded"')
     page.evaluate('''()=>{window.qaCalls={casts:0,vfx:0,projectiles:0,shapes:{}};const tick=G.Combat.tick;G.Combat.tick=function(...args){qaCalls.casts++;return tick.apply(this,args)};const draw=G.VFX.draw;G.VFX.draw=function(...args){qaCalls.vfx++;qaCalls.shapes[args[1]]=(qaCalls.shapes[args[1]]||0)+1;return draw.apply(this,args)};const spawn=G.Projectiles.spawn;G.Projectiles.spawn=function(...args){qaCalls.projectiles++;return spawn.apply(this,args)}}''')
     assert page.locator('.pokemon-card').count()==6

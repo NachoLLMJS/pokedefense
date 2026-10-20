@@ -2,6 +2,8 @@ POKEDEFENSE — RESCUE GROVE
 
 Open: double-click Abrir PokeDefense.cmd or index.html. No installation, account, wallet or internet needed for gameplay.
 
+Opening screen: the exact Emerald bicycle video and PokemonSolid font from Flapcha, with only POKETH and PLAY. The title/button appear after 1.5 seconds and game asset initialization. Press PLAY to enter; gameplay shortcuts are blocked until then. No Flapcha wallet, token-launch, navigation or backend logic is imported.
+
 1. Choose one of six Pokemon in the team panel.
 2. Click an empty circular spot beside the trail to deploy it.
 3. Send a wave when ready. All six defenders use original ranged abilities; attacks happen automatically.
@@ -32,6 +34,7 @@ Vercel uses vercel.json with the explicit site/ output. No gameplay backend or s
 Development: node --test *.test.cjs
 Source-fidelity tests compare against the original sibling PokeSurvivor folder, which must be present locally.
 Piplup-family orientation, paid evolution and real combat QA: uv run --with playwright python qa-orientation.py [optional production URL]
+Intro video, POKETH/PLAY, mobile/desktop entry and gameplay gating: uv run --with playwright python qa-loader.py
 Browser fullscreen QA: uv run --with playwright python qa-fullscreen.py
 Browser gameplay QA: uv run --with playwright python qa-gameplay.py
 All six evolution lines, paid upgrades, single-evolution case, source sprite decoding and ranged combat: uv run --with playwright python qa-evolution.py

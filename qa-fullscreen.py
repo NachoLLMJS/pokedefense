@@ -10,6 +10,7 @@ with sync_playwright() as p:
     for w,h in [(1920,1080),(1440,900),(1366,768),(1264,569),(390,844),(844,390)]:
         page.set_viewport_size({'width':w,'height':h})
         page.goto((ROOT/'index.html').as_uri())
+        page.locator('#intro-play').click()
         page.wait_for_function('window.pokeDefense && document.fonts.status === "loaded"')
         page.wait_for_timeout(200)
         info=page.evaluate('''()=>{const c=document.querySelector('#battlefield'),r=c.getBoundingClientRect();return{width:innerWidth,height:innerHeight,canvas:{x:r.x,y:r.y,w:r.width,h:r.height},overflow:document.documentElement.scrollWidth>innerWidth||document.documentElement.scrollHeight>innerHeight,blocked:TD.pads.map((p,i)=>{const s=pokeDefense.toScreen(p.x,p.y);const el=document.elementFromPoint(s.x,s.y);return el===c?null:{i,element:el?.className,x:s.x,y:s.y}}).filter(Boolean)}}''')

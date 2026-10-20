@@ -1,0 +1,16 @@
+@font-face{font-family:'PokemonSolid';src:url('assets/fonts/pokemon-solid.ttf') format('truetype');font-display:swap}
+/* Emerald scene loader */
+.emerald-loader{position:fixed;inset:0;z-index:1000;overflow:hidden;display:grid;place-items:center;background:#102841;font-family:'PokemonSolid','Comic Sans MS',cursive;isolation:isolate}
+.emerald-loader video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;image-rendering:pixelated;filter:saturate(1.08) contrast(1.03)}
+.loader-vignette{position:absolute;inset:0;background:linear-gradient(180deg,#06182b22 0%,transparent 36%,#06182b55 100%),radial-gradient(circle at center,transparent 20%,#06182b70 100%)}
+.loader-entry{position:relative;z-index:2;width:min(760px,calc(100% - 32px));padding:30px 20px 28px;text-align:center;animation:loader-entry-in .2s ease-out both}
+.loader-entry h1{margin:10px 0 28px;color:#fff;font-size:clamp(48px,6vw,86px);font-weight:400;line-height:1;-webkit-text-stroke:5px #080808;paint-order:stroke fill;text-shadow:0 6px 0 #080808,0 12px 30px #0009}
+.loader-entry h1 span{color:#fff}
+.loader-entry button{min-width:210px;height:58px;margin:0 auto;padding:0;display:flex;align-items:center;justify-content:center;text-align:center;border:3px solid #080808;border-radius:18px;background:linear-gradient(180deg,#ffdf48,#f2b91d);box-shadow:0 6px 0 #080808,0 12px 28px #07162e88;color:#fff;cursor:pointer;transition:transform .16s ease,filter .16s ease}
+.loader-entry button>span{display:block;transform:translateY(-1px);font-family:'PokemonSolid','Comic Sans MS',cursive;font-size:21px;font-weight:400;line-height:1;letter-spacing:.025em;-webkit-text-stroke:1.5px #080808;paint-order:stroke fill;text-shadow:0 2px 0 #080808}
+.loader-entry button:hover{transform:translateY(-2px);filter:brightness(1.07)}.loader-entry button:active{transform:translateY(3px);box-shadow:0 3px 0 #080808}
+@keyframes loader-entry-in{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.loader-entry{animation:none}.loader-entry button{transition:none}}
+
+.emerald-loader[hidden],.loader-entry[hidden]{display:none}
+@media(max-width:760px){.emerald-loader video{object-position:12% center}.loader-entry{padding:24px 18px}.loader-entry h1{font-size:43px;-webkit-text-stroke-width:3px}.loader-entry button{height:52px;font-size:23px}}

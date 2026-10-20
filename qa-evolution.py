@@ -11,6 +11,7 @@ with sync_playwright() as p:
     page.on('requestfailed',lambda r:failed.append(r.url))
     for kind,forms in LINES.items():
         page.goto((ROOT/'index.html').as_uri())
+        page.locator('#intro-play').click()
         page.wait_for_function('window.pokeDefense && document.fonts.status === "loaded"')
         page.locator(f'.pokemon-card[data-type="{kind}"]').click()
         q=page.evaluate('pokeDefense.toScreen(TD.pads[4].x,TD.pads[4].y)')

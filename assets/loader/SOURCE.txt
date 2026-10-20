@@ -1,0 +1,7 @@
+Asset: pokemon-emerald-bicycle.webm
+Source: https://github.com/christt105/PokemonEmeraldIntroVideo
+Source commit: 870520f6161ee521835d2a1bb6b4d037d61c5278
+Scene author: christt105
+Original Pokémon Emerald graphics, tilemaps and palettes: Nintendo / Game Freak, via pret/pokeemerald
+Imported for the local Flapcha loader on October 2, 2026
+The source repository does not contain an explicit LICENSE file; keep this integration local/private until rights are reviewed for public commercial deployment

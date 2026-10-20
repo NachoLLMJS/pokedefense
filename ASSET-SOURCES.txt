@@ -3,6 +3,8 @@ POKEDEFENSE — LOCAL FAN PROJECT
 Character sprite sheets and geometry copied from the user's PokeSurvivor assets. Original SpriteCollab credits retained in SOURCE-CREDITS.md. These are community sprites; do not represent every sprite as official Nintendo artwork.
 Font copied from PokeSurvivor with its OFL.txt.
 
+Intro only: copied Flapcha's original assets/loader/pokemon-emerald-bicycle.webm and fonts/pokemon-solid.ttf byte-for-byte. Loader provenance retained unchanged in assets/loader/SOURCE.txt: scene by christt105 (PokemonEmeraldIntroVideo), original Pokemon graphics by Nintendo / Game Freak. The source note does not establish an explicit reuse license; do not assume commercial permission. The title is POKETH, the entry control is PLAY, and the original token-launch slogan is omitted. No Flapcha application, backend, wallet or token logic is copied.
+
 Nexus: the orange-roof chimney house from the user-supplied 8192.gif sprite sheet.
 Original file retained unchanged as assets/source-buildings.gif (439 x 250, single frame).
 House is the exact RGBA crop (76,91)-(140,166), 64 x 75 pixels, saved as assets/nexus-house.png and rendered uniformly at 2x. The supplied transparency is retained; no recoloring, silhouette repaint or generic replacement.

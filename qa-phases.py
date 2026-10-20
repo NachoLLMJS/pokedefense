@@ -18,6 +18,7 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.on('requestfailed',lambda req:failed.append(req.url))
     page.goto((ROOT/'index.html').as_uri())
+    page.locator('#intro-play').click()
     page.wait_for_function('window.pokeDefense && document.fonts.status === "loaded"')
     for kind,pad in [('treecko',0),('squirtle',1),('pikachu',2),('piplup',3)]:deploy(page,kind,pad)
     assert page.evaluate('pokeDefense.game.towers.length')==4

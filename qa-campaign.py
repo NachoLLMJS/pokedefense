@@ -7,6 +7,7 @@ with sync_playwright() as p:
     page=browser.new_page(viewport={'width':1440,'height':900})
     errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
     page.goto((ROOT/'index.html').as_uri())
+    page.locator('#intro-play').click()
     page.wait_for_function('window.pokeDefense')
     # Accelerate the real simulation; only public build/upgrade/wave methods spend or grant resources.
     result=page.evaluate('''()=>{

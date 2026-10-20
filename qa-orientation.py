@@ -10,6 +10,7 @@ with sync_playwright() as p:
     page.on('pageerror',lambda e:errors.append(str(e)))
     page.on('requestfailed',lambda r:failed.append(r.url))
     page.goto(url)
+    page.locator('#intro-play').click()
     page.wait_for_function('window.pokeDefense && document.fonts.status === "loaded"')
     page.locator('.pokemon-card[data-type="piplup"]').click()
     q=page.evaluate('pokeDefense.toScreen(TD.pads[4].x,TD.pads[4].y)')

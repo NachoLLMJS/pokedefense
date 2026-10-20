@@ -9,7 +9,8 @@ function sheet(dex,anim){const key=dex+'/'+anim;if(!images.has(key)){const img=n
 function sprite(c,dex,anim,x,y,scale=2,dir=0,phase=0){let m=G.SPRITE_META[dex]?.a[anim];if(!m)return;const im=sheet(dex,anim);if(!im.complete||!im.naturalWidth)return;let tick=((time+phase)*60)%m.d.reduce((a,b)=>a+b,0),frame=0;while(tick>=m.d[frame]&&frame<m.n-1)tick-=m.d[frame++];c.imageSmoothingEnabled=false;c.drawImage(im,frame*m.w,Math.min(dir,m.r-1)*m.h,m.w,m.h,Math.round(x-m.ax*scale),Math.round(y-m.ay*scale),m.w*scale,m.h*scale);}
 for(const id of TD.enemyDex)sheet(id,'Walk');
 for(const d of TD.catalog)sheet(d.dex,'Idle');
-G.Sprites.preload(TD.defenderDex);
+const defenderReady=G.Sprites.preload(TD.defenderDex);
+const introActive=()=>!$('intro-loader').hidden;
 function beep(freq=500){if(muted)return;G.Audio.sfx(freq>=700?'confirm':freq<450?'click':'coin');}
 function message(text){$('message').textContent=text;}
 function showOverlay(title,copy,label='FIELD GUIDE',mode='help'){
@@ -56,6 +57,7 @@ function padAt(p){return TD.pads.findIndex(a=>Math.hypot(a.x-p.x,a.y-p.y)<36);}
 canvas.addEventListener('pointermove',e=>{hover=padAt(position(e));});canvas.addEventListener('pointerleave',()=>hover=-1);
 canvas.addEventListener('click',e=>{const i=padAt(position(e));if(i<0)return;const t=game.towers.find(t=>t.pad===i);if(t){game.selectedId=t.id;chosen=null;message(`${TD.form(t).name} selected. Evolve, upgrade or recall your partner.`);}else if(chosen){if(game.build(chosen,i)){message(`${catalog(chosen).name} deployed. A new friend on the field!`);beep(700);}else message('Not enough coins to deploy this partner.');}sync();});
 window.addEventListener('keydown',e=>{
+ if(introActive())return;
  if(e.key==='Escape'){chosen=null;game.selectedId=null;dismissOverlay();sync();return;}
  if(!$('overlay').hidden){if((e.code==='Space'||e.key==='Enter')&&overlayMode==='wave'){e.preventDefault();$('overlay-close').click();}return;}
  if(['BUTTON','INPUT'].includes(document.activeElement.tagName))return;
@@ -77,6 +79,7 @@ skills.draw(ctx);
 if(hover>=0&&chosen&&!game.towers.some(t=>t.pad===hover)){ctx.globalAlpha=.55;sprite(ctx,catalog(chosen).dex,'Idle',TD.pads[hover].x,TD.pads[hover].y,2.1);ctx.globalAlpha=1;}
 for(const b of $('roster').children){const c=b.querySelector('canvas'),cx=c.getContext('2d');cx.clearRect(0,0,c.width,c.height);sprite(cx,catalog(b.dataset.type).dex,'Idle',53,71,2.4);}
 if(paused){ctx.fillStyle='#14291c66';ctx.fillRect(0,0,960,640);ctx.font='42px Pixelify';ctx.textAlign='center';ctx.fillStyle='#ecf0cd';ctx.fillText('PAUSED',480,320);}}
-let syncTimer=0;function frame(now){const dt=Math.min((now-last)/1000,.06);last=now;if(!paused){time+=dt;if($('overlay').hidden)for(let i=0;i<speed;i++)game.update(dt);if($('overlay').hidden||game.status!=='wave')skills.updateVisuals(dt*speed);}phaseTransition();syncTimer+=dt;if(syncTimer>.12){sync();syncTimer=0;}if(game.kills>lastKills){beep(450);lastKills=game.kills;}if(!terminalShown&&['won','lost'].includes(game.status)){terminalShown=true;showOverlay(game.status==='won'?'Home, safe home.':'The grove needs you.',game.status==='won'?`All 15 waves survived. ${game.kills} visitors defeated. Your rescue base is safe!`:`You reached wave ${game.wave} and defeated ${game.kills} visitors. Try mixing different partners and upgrading before the bosses arrive.`,game.status==='won'?'MISSION COMPLETE':'BASE OVERRUN','terminal');}render();requestAnimationFrame(frame);}
-window.pokeDefense={game,skills,get view(){return view;},toScreen:(x,y)=>TDView.toScreen(view,x,y),get chosen(){return chosen;},get paused(){return paused;},get speed(){return speed;},reset};sync();requestAnimationFrame(frame);
+let syncTimer=0;function frame(now){const dt=Math.min((now-last)/1000,.06);last=now;if(!paused&&!introActive()){ time+=dt;if($('overlay').hidden)for(let i=0;i<speed;i++)game.update(dt);if($('overlay').hidden||game.status!=='wave')skills.updateVisuals(dt*speed);}phaseTransition();syncTimer+=dt;if(syncTimer>.12){sync();syncTimer=0;}if(game.kills>lastKills){beep(450);lastKills=game.kills;}if(!terminalShown&&['won','lost'].includes(game.status)){terminalShown=true;showOverlay(game.status==='won'?'Home, safe home.':'The grove needs you.',game.status==='won'?`All 15 waves survived. ${game.kills} visitors defeated. Your rescue base is safe!`:`You reached wave ${game.wave} and defeated ${game.kills} visitors. Try mixing different partners and upgrading before the bosses arrive.`,game.status==='won'?'MISSION COMPLETE':'BASE OVERRUN','terminal');}render();requestAnimationFrame(frame);}
+const ready=Promise.all([defenderReady,document.fonts.ready,house.decode().catch(()=>{}),...Array.from(images.values(),img=>img.decode().catch(()=>{}))]);
+window.pokeDefense={game,skills,ready,get view(){return view;},toScreen:(x,y)=>TDView.toScreen(view,x,y),get chosen(){return chosen;},get paused(){return paused;},get speed(){return speed;},reset};sync();requestAnimationFrame(frame);
 })();

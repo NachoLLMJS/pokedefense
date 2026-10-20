@@ -8,6 +8,7 @@ with sync_playwright() as p:
     errors=[]
     page.on('pageerror',lambda error:errors.append(str(error)))
     page.goto((ROOT/'index.html').as_uri())
+    page.locator('#intro-play').click()
     page.wait_for_function('window.pokeDefense && window.RescueMap && document.fonts.status === "loaded"')
     assert page.evaluate('RescueMap.seed')==723
     assert page.evaluate('document.querySelectorAll(".pokemon-card").length')==6
